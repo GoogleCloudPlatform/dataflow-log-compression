@@ -1,0 +1,40 @@
+{
+    "name": "decompress_logs",
+    "description": "Pipeline for decompressing logs and updating TTL metadata.",
+    "parameters": [
+        {
+            "name": "startDate",
+            "label": "Start Date",
+            "helpText": "The start date for logs to be decompressed, format yyyy-mm-dd",
+            "required": true
+        },
+        {
+            "name": "endDate",
+            "label": "End Date",
+            "helpText": "The end date for logs to be decompressed, format yyyy-mm-dd",
+            "required": true
+        },
+        {
+            "name": "folders",
+            "label": "Folders",
+            "helpText": "Array of top-level folder names to process, use '*' for all folders",
+            "defaultValue": "*"
+        },
+        {
+            "name": "daysToKeep",
+            "label": "Days to Keep",
+            "helpText": "Number of days to keep the decompressed files before they are eligible for deletion",
+            "defaultValue": "3"
+        }
+    ],
+    "sdk_info": {
+        "language": "PYTHON"
+    },
+    "flex_template": {
+        "image": "gcr.io/<GAR-PROJECT-ID>/decompress-container:latest",
+        "environment": {
+            "tempLocation": "gs://<DATAFLOW-BUCKET>/dataflow/temp/",
+            "stagingLocation": "gs://<DATAFLOW-BUCKET>/dataflow/staging/"
+        }
+    }
+}

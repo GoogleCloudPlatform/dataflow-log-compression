@@ -1,0 +1,15 @@
+{
+    "name": "compress_and_clean_logs",
+    "description": "Pipeline for compressing logs and cleaning up old files.",
+    "parameters": [],
+    "sdk_info": {
+        "language": "PYTHON"
+    },
+    "flex_template": {
+        "image": "gcr.io/<GAR-PROJECT-ID>/compress-clean-container:latest",
+        "environment": {
+            "tempLocation": "gs://<DATAFLOW-BUCKET>/dataflow/temp/",
+            "stagingLocation": "gs://<DATAFLOW-BUCKET>/dataflow/staging/"
+        }
+    }
+}
