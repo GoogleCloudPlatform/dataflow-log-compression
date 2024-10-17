@@ -78,8 +78,8 @@ gcloud dataflow flex-template build "gs://<DATAFLOW-BUCKET>/templates/compress_a
 ```
 gcloud dataflow flex-template run "compress-and-clean-logs-job" \
   --template-file-gcs-location "gs://your-bucket-name/templates/compress_and_clean_logs.json" \
-  --region "us-central1" \
-  --parameters subnetwork="https://www.googleapis.com/compute/v1/projects/your-project-id/regions/us-central1/subnetworks/your-subnet"
+  --region "your-region" \
+  --parameters subnetwork="https://www.googleapis.com/compute/v1/projects/your-project-id/regions/your-region/subnetworks/your-subnet"
 ```
 
 Ensure that the Docker container is built and running before building and running the Flex Template.
@@ -162,7 +162,7 @@ gcloud dataflow flex-template build "gs://<DATAFLOW-BUCKET>/templates/decompress
 ```
 gcloud dataflow flex-template run "decompress-logs-job" \
   --template-file-gcs-location "gs://<YOUR_BUCKET_NAME>/templates/decompress_logs.json" \
-  --region "us-central1" \
+  --region "your-region" \
   --parameters startDate="2023-01-01",endDate="2023-02-04",folders="*",daysToKeep="3",subnetwork="<YOUR_SUBNETWORK_URL>"
 ```
 
