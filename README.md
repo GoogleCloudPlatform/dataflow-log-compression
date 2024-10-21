@@ -7,6 +7,9 @@ This repository contains two Apache Beam pipelines designed to manage the compre
 ### Overview
 This pipeline compresses log files using Zstandard ([Zstandard](https://github.com/facebook/zstd)) and moves them to Nearline, Coldline, or Archive storage in GCS. It substitutes GCS lifecycle management for compressing and storing files while also cleaning up decompressed files by checking their TTL metadata. **Important:** GCS lifecycle management will still be needed to delete compressed files in Nearline/Coldline/Archival after a certain period.
 
+### Disclaimer
+This pipeline moves logs in a manner similar to Google Cloud Storage (GCS) lifecycle management. It is important to thoroughly test the code in a non-production logging bucket before deploying it in any production environment. The pipeline logic and parameters should be validated against your specific use case, as individual requirements and behaviors may vary. Users are responsible for fully testing, understanding, and verifying the code to ensure it works as expected before implementing it in a production system.
+
 ### Key Variables
 The following variables should be adjusted across the pipeline files. Some are mandatory, while others are optional.
 
@@ -215,7 +218,7 @@ You may want to implement automatic lifecycle management policies in GCS to dele
 ## FAQ
 
 ### Is this production-ready code?
-No, this is not production-ready. It should be tested thoroughly and adjusted based on specific use cases.
+No, this is not production-ready. It should be tested thoroughly and adjusted based on specific use cases prior to production use.
 
 ### What is the purpose of the `SIZE_THRESHOLD_BYTES` variable?
 This variable ensures that small files, which may not benefit from compression, are moved directly to Nearline/Coldline/Archive storage without being compressed.
